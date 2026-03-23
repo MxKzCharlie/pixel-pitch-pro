@@ -3,7 +3,7 @@ import Screen1 from "@/components/Screen1";
 import Screen2 from "@/components/Screen2";
 import Screen3 from "@/components/Screen3";
 
-const WEBHOOK_URL = "https://n8n-n8n.ts5wkw.easypanel.host/webhook-test/89a12942-1edf-4485-a894-e8ea5d9e68c1";
+const WEBHOOK_URL = "TU_WEBHOOK_URL_AQUI";
 
 const Index = () => {
   const [screen, setScreen] = useState<1 | 2 | 3>(1);
@@ -28,7 +28,9 @@ const Index = () => {
 
       if (!res.ok) throw new Error(`Error ${res.status}`);
 
-      const data = await res.json();
+      const raw = await res.json();
+      console.log("Webhook response:", raw);
+      const data = Array.isArray(raw) ? raw[0] : raw;
       setCasoActual(data);
       setScreen(2);
     } catch (e: any) {
@@ -87,7 +89,7 @@ const Index = () => {
   }
 
   if (screen === 2 && casoActual?.negocio) {
-    return <Screen2 negocio={casoActual.negocio} onSubmit={handleSubmitSolution} />;
+    return <Screen2 negocio={casoActual.negocio} observaciones={casoActual.observaciones} onSubmit={handleSubmitSolution} />;
   }
 
   if (screen === 3 && casoActual?.solucion_ideal) {

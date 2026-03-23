@@ -6,9 +6,9 @@ interface Props {
 }
 
 const negocios = [
-  { id: "SPA y Salones de Belleza", icon: "spa", desc: "Enfoque: Venta de servicios premium y recurrencia.", color: "error" },
-  { id: "Consultorios Médicos y Dentales", icon: "medical_services", desc: "Enfoque: Autoridad, confianza y planes de tratamiento.", color: "tertiary" },
-  { id: "Gimnasios y Centros de Fitness", icon: "fitness_center", desc: "Enfoque: Cierre rápido y membresías a largo plazo.", color: "primary" },
+  { id: "SPA y Salones de Belleza", icon: "spa", color: "error" },
+  { id: "Consultorios Médicos y Dentales", icon: "medical_services", color: "tertiary" },
+  { id: "Gimnasios y Centros de Fitness", icon: "fitness_center", color: "primary" },
 ];
 
 const dificultades = ["Fácil", "Medio", "Difícil"];
@@ -73,7 +73,6 @@ const Screen1 = ({ onGenerate, loading }: Props) => {
                     <span className={`material-symbols-outlined ${c.text} text-5xl`} style={{ fontVariationSettings: "'FILL' 1" }}>{n.icon}</span>
                   </div>
                   <h3 className="text-xl font-black text-on-surface uppercase mb-3 leading-tight">{n.id}</h3>
-                  <p className="text-xs text-on-surface-variant font-medium uppercase mb-6">{n.desc}</p>
                   <div className={`mt-auto w-full py-2 ${selected ? c.btnBg : "bg-surface-container-highest"} ${selected ? c.btnText : "text-on-surface-variant"} font-bold text-xs uppercase transition-colors`}>
                     {selected ? "✓ Seleccionado" : "Seleccionar"}
                   </div>

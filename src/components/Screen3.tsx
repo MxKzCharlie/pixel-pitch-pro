@@ -7,7 +7,7 @@ interface Dolor {
 interface Automatizacion {
   nombre: string;
   descripcion: string;
-  plataformas: string[];
+  plataformas: string[] | string;
 }
 
 interface SolucionIdeal {
@@ -73,7 +73,7 @@ const Screen3 = ({ solucionIdeal, calculoUsuario, solucionUsuario, onReset }: Pr
                 <div key={i} className="bg-surface-container-high p-6 border-b-4 border-error">
                   <p className="text-xs font-bold text-error uppercase mb-2">{d.dolor}</p>
                   <div className="flex items-baseline gap-2 mb-2">
-                    <span className="text-3xl font-black">${d.costo_mensual_usd}</span>
+                    <span className="text-3xl font-black">{d.costo_mensual_usd}</span>
                     <span className="text-xs font-bold opacity-60">USD / MES</span>
                   </div>
                   <p className="text-xs text-on-surface-variant italic">{d.calculo}</p>
@@ -89,13 +89,13 @@ const Screen3 = ({ solucionIdeal, calculoUsuario, solucionUsuario, onReset }: Pr
             </h3>
             <div className="space-y-4">
               {solucionIdeal.automatizaciones.map((a, i) => (
-                <div key={i} className="bg-background p-6 flex flex-col md:flex-row gap-6 items-start border-l-4 border-tertiary">
+                <div key={i} className="bg-background p-6 flex flex-col gap-6 border-l-4 border-tertiary">
                   <div className="flex-1">
                     <h4 className="text-lg font-bold uppercase tracking-tight text-tertiary">{a.nombre}</h4>
                     <p className="text-sm text-on-surface-variant mt-1">{a.descripcion}</p>
                   </div>
                   <div className="flex gap-2 flex-wrap">
-                    {a.plataformas.map((p, j) => (
+                    {(Array.isArray(a.plataformas) ? a.plataformas : a.plataformas.split(", ")).map((p, j) => (
                       <span key={j} className="bg-surface-container-highest px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-on-surface">
                         {p}
                       </span>
@@ -110,19 +110,19 @@ const Screen3 = ({ solucionIdeal, calculoUsuario, solucionUsuario, onReset }: Pr
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-surface-container-highest p-8">
               <span className="text-[10px] font-black uppercase tracking-widest text-primary">Inversión Inicial</span>
-              <p className="text-4xl font-black mt-2">${solucionIdeal.precio_implementacion_usd} <span className="text-sm opacity-50">USD</span></p>
+              <p className="text-4xl font-black mt-2">{solucionIdeal.precio_implementacion_usd} <span className="text-sm opacity-50"></span></p>
               <p className="text-xs text-on-surface-variant mt-2">Implementación y configuración de infraestructura.</p>
             </div>
             <div className="bg-surface-container-highest p-8 border-l-2 border-primary">
               <span className="text-[10px] font-black uppercase tracking-widest text-primary">Mantenimiento Mensual</span>
-              <p className="text-4xl font-black mt-2">${solucionIdeal.precio_mensual_usd} <span className="text-sm opacity-50">USD</span></p>
+              <p className="text-4xl font-black mt-2">{solucionIdeal.precio_mensual_usd} <span className="text-sm opacity-50"></span></p>
               <p className="text-xs text-on-surface-variant mt-2">Tokens de IA, licencias y soporte.</p>
             </div>
           </div>
 
           {/* Argumento de venta */}
           <div className="bg-primary p-8">
-            <h4 className="text-on-primary text-[10px] font-black uppercase tracking-[0.3em] mb-4">CONCENTRADO ESTRATÉGICO</h4>
+            <h4 className="text-on-primary text-[10px] font-black uppercase tracking-[0.3em] mb-4">SPEECH DE VENTA</h4>
             <p className="text-on-primary text-2xl md:text-3xl font-black uppercase tracking-tighter leading-none italic">
               "{solucionIdeal.argumento_venta}"
             </p>

@@ -7,15 +7,15 @@ interface Negocio {
   ticket_promedio: string;
   ingreso_mensual: string;
   detalle_extra: string;
-  observaciones: string[];
 }
 
 interface Props {
   negocio: Negocio;
+  observaciones?: string[];
   onSubmit: (calculo: string, solucion: string) => void;
 }
 
-const Screen2 = ({ negocio, onSubmit }: Props) => {
+const Screen2 = ({ negocio, observaciones = [], onSubmit }: Props) => {
   const [calculo, setCalculo] = useState("");
   const [solucion, setSolucion] = useState("");
 
@@ -72,7 +72,7 @@ const Screen2 = ({ negocio, onSubmit }: Props) => {
             <span className="w-8 h-1 bg-primary" /> OBSERVACIONES DE LA SIMULACIÓN
           </h2>
           <div className="space-y-6">
-            {negocio.observaciones.map((obs, i) => (
+            {observaciones.map((obs, i) => (
               <div
                 key={i}
                 className={`relative p-6 ${i % 2 === 0 ? "bg-surface-container" : "bg-surface-container-high"}`}
